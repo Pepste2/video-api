@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+    <tabs>
+        <!-- 海康威视 Tab -->
+        <Tab text="海康威视">
+            <content>
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="20" bottom="10" left="20"/>
+                    </padding>
+                    <!-- 输入区域 -->
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="150" prefWidth="150" maxWidth="150"/>
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                            <ColumnConstraints minWidth="80" prefWidth="80" maxWidth="100"/>
+                        </columnConstraints>
+
+                        <rowConstraints>
+                            <RowConstraints prefHeight="30"/>
+                            <RowConstraints prefHeight="30"/>
+                            <RowConstraints prefHeight="30"/>
+                            <RowConstraints prefHeight="30"/>
+                        </rowConstraints>
+
+                        <Text text="ArtemisConfig.host" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="host1" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Button fx:id="checkHikVision" text="检测" onAction="#checkHikVision" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                        <Text text="ArtemisConfig.appKey" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="appKey1" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Button fx:id="search1" text="搜索" onAction="#searchHikVision" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                        <Text text="ArtemisConfig.appSecret" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="appSecret1" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Text text="CameraIndexCode" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="cameraIndexCode" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Button fx:id="getPreview" text="预览" onAction="#getPreview" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    </GridPane>
+
+                    <!-- 分隔线 -->
+                    <Separator/>
+
+                    <!-- 结果显示区域 - 自动扩展 -->
+                    <Text text="结果:"/>
+                    <TextArea fx:id="result1" VBox.vgrow="ALWAYS" wrapText="true"/>
+                </VBox>
+            </content>
+        </Tab>
+
+        <!-- 萤石 Tab -->
+        <Tab text="萤石">
+            <content>
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="20" bottom="10" left="20"/>
+                    </padding>
+                    <!-- 输入区域 -->
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="100" prefWidth="100" maxWidth="100"/>
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="300"/>
+                            <ColumnConstraints minWidth="80" prefWidth="80" maxWidth="100"/>
+                        </columnConstraints>
+
+                        <rowConstraints>
+                            <RowConstraints prefHeight="30"/>
+                            <RowConstraints prefHeight="30"/>
+                            <RowConstraints prefHeight="30"/>
+                        </rowConstraints>
+
+                        <Text text="appKey" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="appKey2" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Button fx:id="checkYingShi" text="检测" onAction="#checkYingShi" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                        <Text text="appSecret" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="appSecret2" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Button fx:id="search2" text="搜索" onAction="#searchYingShi" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                        <Text text="accessToken" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="accessToken2" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    </GridPane>
+
+                    <!-- 分隔线 -->
+                    <Separator/>
+
+                    <!-- 结果显示区域 - 自动扩展 -->
+                    <Text text="结果:"/>
+                    <TextArea fx:id="result2" VBox.vgrow="ALWAYS" wrapText="true"/>
+                </VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

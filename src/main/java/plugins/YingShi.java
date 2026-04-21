@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- */
 package plugins;
 
 import com.alibaba.fastjson.JSON;
@@ -46,47 +43,56 @@ public class YingShi {
     }
 
     public void checkValid() {
-        this.mainController.result2.appendText("\u5f00\u59cb\u9a8c\u8bc1api\u6709\u6548\u6027\n");
+        this.mainController.result2.appendText("开始验证api有效性\n");
         try {
             JSONObject resp = this.getAccessToken();
             System.out.println(resp);
             if (resp.get("code").equals("200")) {
-                System.out.println("[+] api\u6709\u6548");
-                this.mainController.result2.appendText("[+] api\u6709\u6548\n");
-                String pretty = JSON.toJSONString((Object)resp, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
+                System.out.println("[+] api有效");
+                this.mainController.result2.appendText("[+] api有效\n");
+                String pretty = JSON.toJSONString(resp, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
                 this.mainController.result2.appendText(pretty + "\n\n");
                 this.mainController.search2.setDisable(false);
+                // 自动填充 accessToken
+                if (resp.containsKey("data")) {
+                    JSONObject data = resp.getJSONObject("data");
+                    if (data != null && data.containsKey("accessToken")) {
+                        String token = data.getString("accessToken");
+                        this.mainController.accessToken2.setText(token);
+                        this.mainController.result2.appendText("[+] accessToken 已自动填入输入框\n\n");
+                    }
+                }
             } else {
-                System.out.println("[-] api\u65e0\u6548");
-                this.mainController.result2.appendText("[-] api\u65e0\u6548\n\n");
+                System.out.println("[-] api无效");
+                this.mainController.result2.appendText("[-] api无效\n\n");
                 this.mainController.search2.setDisable(true);
             }
         }
         catch (Exception e) {
-            System.out.println("[-] api\u65e0\u6548");
-            this.mainController.result2.appendText("[-] api\u65e0\u6548\n\n");
+            System.out.println("[-] api无效");
+            this.mainController.result2.appendText("[-] api无效\n\n");
             this.mainController.search2.setDisable(true);
         }
     }
 
     public void checkSearch(String accessToken) {
-        this.mainController.result2.appendText("\u5f00\u59cb\u9a8c\u8bc1\u641c\u7d22\u89c6\u9891\u8d44\u6e90\n");
+        this.mainController.result2.appendText("开始验证搜索视频资源\n");
         try {
             JSONObject resp = this.search(accessToken);
             System.out.println(resp);
             if (resp.get("code").equals("200")) {
-                System.out.println("[+] \u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90");
-                this.mainController.result2.appendText("[+] \u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90\n");
-                String pretty = JSON.toJSONString((Object)resp, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
+                System.out.println("[+] 获取到视频资源");
+                this.mainController.result2.appendText("[+] 获取到视频资源\n");
+                String pretty = JSON.toJSONString(resp, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
                 this.mainController.result2.appendText(pretty + "\n\n");
             } else {
-                System.out.println("[-] \u672a\u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90");
-                this.mainController.result2.appendText("[-] \u672a\u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90\n\n");
+                System.out.println("[-] 未获取到视频资源");
+                this.mainController.result2.appendText("[-] 未获取到视频资源\n\n");
             }
         }
         catch (Exception e) {
-            System.out.println("[-] \u672a\u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90");
-            this.mainController.result2.appendText("[-] \u672a\u83b7\u53d6\u5230\u89c6\u9891\u8d44\u6e90\n\n");
+            System.out.println("[-] 未获取到视频资源");
+            this.mainController.result2.appendText("[-] 未获取到视频资源\n\n");
         }
     }
 

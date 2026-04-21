@@ -51,7 +51,7 @@ implements Initializable {
     @FXML
     private TextField appSecret2;
     @FXML
-    private TextField accessToken2;
+    public TextField accessToken2;
 
     public void initialize(URL location, ResourceBundle resources) {
         ControllerFactory.controllers.put(MainController.class.getSimpleName(), this);
